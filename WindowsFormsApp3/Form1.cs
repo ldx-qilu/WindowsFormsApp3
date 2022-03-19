@@ -28,9 +28,27 @@ namespace WindowsFormsApp3
             string P_Str_SqlStr = string.Format("SELECT Host,User FROM user");
             MySqlDataAdapter adapter = new MySqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);
             DataTable P_dt = new DataTable();
-            adapter.Fill(P_dt);
+            try
+            {
+                adapter.Fill(P_dt);
+            }
+            catch (Exception ex)
+            {
+                label1.Text = ex.InnerException.Message;
+                //throw;
+            }
+            
             this.dataGridView1.DataSource = P_dt;
+            label1.Text = "连接成功";
             return P_dt;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Hide();
+            Form2 f2 = new Form2();
+            f2.ShowDialog();
+            this.Close();
         }
     }
 }
