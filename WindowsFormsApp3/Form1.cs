@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace WindowsFormsApp3
 {
@@ -40,6 +41,21 @@ namespace WindowsFormsApp3
             
             this.dataGridView1.DataSource = P_dt;
             label1.Text = "连接成功";
+
+
+            foreach (System.Data.DataRow row in P_dt.Rows)
+
+            {
+
+                foreach (System.Data.DataColumn col in P_dt.Columns)
+
+                {
+
+                    Console.WriteLine("{0} = {1}", col.ColumnName, row[col]);
+
+                }
+
+            }
             return P_dt;
         }
 
@@ -49,6 +65,31 @@ namespace WindowsFormsApp3
             Form2 f2 = new Form2();
             f2.ShowDialog();
             this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string constr = string.Format("server={0};uid = {1};pwd = 'sa2012';;database=Datatest", "localhost", "sa");
+            SqlConnection con = new SqlConnection(constr);
+            con.Open();
+            int count = this.dataGridView1.Rows.Count;
+            for (int i = 1;i < count;i++)
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "select * from tb_User where UserName = '" + this.dataGridView1.Rows[i].Cells[0].Value.ToString() + " ';";                              
+                SqlDataReader sdr = cmd.ExecuteReader();
+                if(sdr.Read())
+                {
+                    sdr.Close();    
+                }
+                else
+                {
+                    SqlCommand cmd1 = con.CreateCommand();
+                    cmd1.CommandText = "insert into tb_User (UserName, UserPwd) values ('" + this.dataGridView1.Rows[i].Cells[0].Value.ToString() + "','" + "123456" + "');";
+                    int ic = cmd1.ExecuteNonQuery();
+                }
+            }
+            con.Close();
         }
     }
 }
