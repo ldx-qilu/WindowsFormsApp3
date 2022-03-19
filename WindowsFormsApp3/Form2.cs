@@ -24,5 +24,10 @@ namespace WindowsFormsApp3
             f1.ShowDialog();
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
