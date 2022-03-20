@@ -26,23 +26,21 @@ namespace WindowsFormsApp3
         private DataTable GetMessage()
         {
             string P_Str_ConnectionStr = string.Format("server={0};user id = {1};pwd = 'lvdx2020';port = {2};database=mysql;pooling = false;", "localhost", "root", 3306);
-            string P_Str_SqlStr = string.Format("SELECT Host,User FROM user");
+            string P_Str_SqlStr = string.Format("SELECT Host,User FROM user_test");
             MySqlDataAdapter adapter = new MySqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);
             DataTable P_dt = new DataTable();
             try
             {
                 adapter.Fill(P_dt);
+                this.dataGridView1.DataSource = P_dt;
+                label1.Text = "连接成功";
             }
             catch (Exception ex)
             {
                 label1.Text = ex.InnerException.Message;
                 //throw;
-            }
+            }    
             
-            this.dataGridView1.DataSource = P_dt;
-            label1.Text = "连接成功";
-
-
             foreach (System.Data.DataRow row in P_dt.Rows)
 
             {
@@ -71,25 +69,51 @@ namespace WindowsFormsApp3
         {
             string constr = string.Format("server={0};uid = {1};pwd = 'sa2012';;database=Datatest", "localhost", "sa");
             SqlConnection con = new SqlConnection(constr);
-            con.Open();
-            int count = this.dataGridView1.Rows.Count;
-            for (int i = 1;i < count;i++)
+            //con.Open();
+            int count = this.dataGridView1.Rows.Count-1;
+            for (int i = 0;i < count;i++)
             {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+                con.Open();
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "select * from tb_User where UserName = '" + this.dataGridView1.Rows[i].Cells[0].Value.ToString() + " ';";                              
                 SqlDataReader sdr = cmd.ExecuteReader();
                 if(sdr.Read())
                 {
-                    sdr.Close();    
+                    sdr.Close();
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Close();
+                    }
+                    //con.Close();
                 }
                 else
                 {
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Close();
+                    }
+                    //con.Close();
+
+                    con.Open();
                     SqlCommand cmd1 = con.CreateCommand();
                     cmd1.CommandText = "insert into tb_User (UserName, UserPwd) values ('" + this.dataGridView1.Rows[i].Cells[0].Value.ToString() + "','" + "123456" + "');";
                     int ic = cmd1.ExecuteNonQuery();
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Close();
+                    }
+                    //con.Close();
                 }
             }
-            con.Close();
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+
         }
     }
 }

@@ -42,6 +42,7 @@ namespace WindowsFormsApp3
                 it.Text = sdr["UserName"].ToString().Trim();
                 it.SubItems.Add(sdr["UserPwd"].ToString().Trim());
                 it.SubItems.Add(sdr["Note"].ToString().Trim());
+                listView1.Items.Clear();
                 listView1.Items.Add(it);
             }
             sdr.Close();
