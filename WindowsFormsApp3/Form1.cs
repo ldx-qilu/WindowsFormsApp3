@@ -115,5 +115,13 @@ namespace WindowsFormsApp3
             }
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Hide();
+            Form3 f3 = new Form3();
+            f3.ShowDialog();
+            this.Close();
+        }
     }
 }
