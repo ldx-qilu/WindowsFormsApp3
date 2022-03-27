@@ -21,23 +21,29 @@ namespace WindowsFormsApp3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ////string connString = "User ID=LVDX;Password=lvdx2020;Data Source=(DESCRIPTION = (ADDRESS_LIST= (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.0.106)(PORT = 1521))) (CONNECT_DATA = (SERVICE_NAME = RACE)))";
-            ////OracleConnection conn = new OracleConnection(connString);
+            string connString = "Data Source=192.168.0.106/orcl;User ID=LVDX;PassWord=lvdx2020";
+            OracleConnection conn = new OracleConnection(connString);
             //string connString = "Provider=OraOLEDB.Oracle.1;User ID=IFSAPP;Password=IFSAPP;Data Source=(DESCRIPTION = (ADDRESS_LIST= (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.0.106)(PORT = 1521))) (CONNECT_DATA = (SERVICE_NAME = RACE)))";
             //OleDbConnection conn = new OleDbConnection(connString);
-            //try
-            //{
-            //    conn.Open();
-            //    MessageBox.Show(conn.State.ToString());
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message.ToString());
-            //}
-            //finally
-            //{
-            //    conn.Close();
-            //}
+            try
+            {
+                conn.Open();
+                MessageBox.Show(conn.State.ToString());
+                get_Oracle_Info();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            
+        }
+        private void get_Oracle_Info()
+        {
+
             string connectionString;
             string queryString;
 
