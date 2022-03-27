@@ -35,8 +35,12 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -52,7 +56,7 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(112, 135);
+            this.dataGridView1.Location = new System.Drawing.Point(112, 122);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(240, 150);
@@ -61,7 +65,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(130, 151);
+            this.label1.Location = new System.Drawing.Point(232, 83);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 12);
             this.label1.TabIndex = 2;
@@ -103,16 +107,47 @@
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Location = new System.Drawing.Point(443, 72);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(298, 235);
+            this.groupBox1.Size = new System.Drawing.Size(298, 200);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "功能";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(17, 24);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 29);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "任务启动";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(175, 24);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 29);
+            this.button6.TabIndex = 8;
+            this.button6.Text = "任务关闭";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Location = new System.Drawing.Point(443, 323);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(298, 100);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "定时任务";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -121,6 +156,7 @@
             this.Text = "MySql";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,6 +171,9 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

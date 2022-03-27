@@ -21,7 +21,30 @@ namespace WindowsFormsApp3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GetMessage();
+            //GetMessage();
+            
+            DataTable P_dt = GetMessage2();
+            this.dataGridView1.DataSource = P_dt;
+            label1.Text = "连接成功";
+        }
+        private DataTable GetMessage2()
+        {
+            MySqlConn mc = new MySqlConn();
+            MySqlConnection conn = mc.open_MySql(mc.constr);
+            string SqlStr = string.Format("SELECT Host,User FROM user_test");
+            MySqlDataAdapter adapter = new MySqlDataAdapter(SqlStr, conn);
+            DataTable P_dt = new DataTable();
+            try
+            {
+                adapter.Fill(P_dt);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                //throw;
+            }            
+            mc.close_SqlServer(conn);
+            return P_dt;
         }
         private DataTable GetMessage()
         {
@@ -122,6 +145,27 @@ namespace WindowsFormsApp3
             Form3 f3 = new Form3();
             f3.ShowDialog();
             this.Close();
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Timer timer1 = new Timer();
+            timer1.Interval = 8000; //设置计时器事件间隔执行时间
+            //timer1.Elapsed += new System.Timers.ElapsedEventHandler(TMStart1_Elapsed);
+            timer1.Enabled = true;
+        }
+        private void TMStart1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            //执行SQL语句或其他操作
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter("C:\\" + 1 + "log.txt", true))
+            {
+                sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Start.");
+            }
         }
     }
 }

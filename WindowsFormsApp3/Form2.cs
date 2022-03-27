@@ -31,22 +31,39 @@ namespace WindowsFormsApp3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(constr);
-            con.Open();
-            SqlCommand cmd = con.CreateCommand();
+            //SqlConnection con = new SqlConnection(constr);
+            //con.Open();
+            //SqlCommand cmd = con.CreateCommand();
+            //cmd.CommandText = "select * from tb_User;";
+            //SqlDataReader sdr = cmd.ExecuteReader();
+            //while(sdr.Read())
+            //{
+            //    ListViewItem it = new ListViewItem();
+            //    it.Text = sdr["UserName"].ToString().Trim();
+            //    it.SubItems.Add(sdr["UserPwd"].ToString().Trim());
+            //    it.SubItems.Add(sdr["Note"].ToString().Trim());
+            //    listView1.Items.Clear();
+            //    listView1.Items.Add(it);
+            //}
+            //sdr.Close();
+            //con.Close();
+
+            SqlServerConn sc = new SqlServerConn();
+            SqlConnection conn = sc.open_SqlServer(sc.constr);
+            SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "select * from tb_User;";
             SqlDataReader sdr = cmd.ExecuteReader();
-            while(sdr.Read())
+            while (sdr.Read())
             {
                 ListViewItem it = new ListViewItem();
                 it.Text = sdr["UserName"].ToString().Trim();
                 it.SubItems.Add(sdr["UserPwd"].ToString().Trim());
                 it.SubItems.Add(sdr["Note"].ToString().Trim());
-                listView1.Items.Clear();
+                //listView1.Items.Clear();
                 listView1.Items.Add(it);
             }
             sdr.Close();
-            con.Close();
+            sc.close_SqlServer(conn);
         }
 
         private void button2_Click(object sender, EventArgs e)
