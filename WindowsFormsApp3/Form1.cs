@@ -14,6 +14,7 @@ namespace WindowsFormsApp3
 {
     public partial class Form1 : Form
     {
+        System.Timers.Timer timer1 = new System.Timers.Timer();
         public Form1()
         {
             InitializeComponent();
@@ -147,25 +148,26 @@ namespace WindowsFormsApp3
             this.Close();
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
-            Timer timer1 = new Timer();
+            
             timer1.Interval = 8000; //设置计时器事件间隔执行时间
-            //timer1.Elapsed += new System.Timers.ElapsedEventHandler(TMStart1_Elapsed);
+            timer1.Elapsed += new System.Timers.ElapsedEventHandler(TMStart1_Elapsed);
             timer1.Enabled = true;
         }
         private void TMStart1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             //执行SQL语句或其他操作
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter("C:\\" + 1 + "log.txt", true))
-            {
-                sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Start.");
-            }
+            Console.WriteLine("测试job");
+            //using (System.IO.StreamWriter sw = new System.IO.StreamWriter("C:\\" + 1 + "log.txt", true))
+            //{
+            //    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Start.");
+            //}
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
         }
     }
 }

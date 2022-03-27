@@ -130,6 +130,7 @@
             this.button6.TabIndex = 8;
             this.button6.Text = "任务关闭";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // groupBox2
             // 
