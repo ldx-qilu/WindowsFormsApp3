@@ -15,6 +15,7 @@ namespace WindowsFormsApp3
     public partial class Form1 : Form
     {
         System.Timers.Timer timer1 = new System.Timers.Timer();
+        int i = 0;
         public Form1()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace WindowsFormsApp3
         private void button1_Click(object sender, EventArgs e)
         {
             //GetMessage();
-            
+
             DataTable P_dt = GetMessage2();
             this.dataGridView1.DataSource = P_dt;
             label1.Text = "连接成功";
@@ -158,11 +159,22 @@ namespace WindowsFormsApp3
         private void TMStart1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             //执行SQL语句或其他操作
-            Console.WriteLine("测试job");
+            Console.WriteLine("测试第" + i + "次job");
             //using (System.IO.StreamWriter sw = new System.IO.StreamWriter("C:\\" + 1 + "log.txt", true))
             //{
             //    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Start.");
             //}
+            i++;
+            DataTable P_dt = GetMessage2();
+            //dataGridView1.DataSource = P_dt;
+            this.Invoke(new EventHandler(delegate
+            {
+                dataGridView1.DataSource = P_dt;
+                string str = "第" + i + "连接成功";
+                label1.Text = str;
+            }));
+            
+
         }
 
         private void button6_Click(object sender, EventArgs e)
